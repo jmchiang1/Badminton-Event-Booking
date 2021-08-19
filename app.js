@@ -11,9 +11,9 @@ const events = [];
 app.use(bodyParser.json());
 
 app.use(
-  '/graphql',
-  graphqlHTTP({
-    schema: buildSchema(`
+    '/graphql',
+    graphqlHTTP({
+        schema: buildSchema(`
         type Event {
           _id: ID!
           title: String!
@@ -38,26 +38,29 @@ app.use(
             mutation: RootMutation
         }
     `),
-    rootValue: {
-      events: () => {
-        return events;
-      },
-      createEvent: args => {
-        const event = {
-          _id: Math.random().toString(),
-          title: args.eventInput.title,
-          description: args.eventInput.description,
-          price: +args.eventInput.price,
-          date: args.eventInput.date
-        };
-        events.push(event);
-        return event;
-      }
-    },
-    graphiql: true
-  })
+        rootValue: {
+            events: () => {
+                return events;
+            },
+            createEvent: args => {
+                const event = {
+                    _id: Math.random().toString(),
+                    title: args.eventInput.title,
+                    description: args.eventInput.description,
+                    price: +args.eventInput.price,
+                    date: args.eventInput.date
+                };
+                events.push(event);
+                return event;
+            }
+        },
+        graphiql: true
+    })
 );
+
+mongoose.connect(`mongodb+srv://${process.env.MONGO_USER}:<${process.env.MONGO_PASSWORD}>@cluster0.iaatv.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`)
 
 app.listen(3000);
 
 //! = not nullible. data must have a value
+// is this in jmchiang remote?
