@@ -91,3 +91,4 @@ mongoose
 
 
 //! = not nullible. data must have a value
+//watch this to continue: https://www.youtube.com/watch?v=sOUNgOx0GcU&list=PL55RiY5tL51rG1x02Yyj93iypUuHYXcB_&index=5
